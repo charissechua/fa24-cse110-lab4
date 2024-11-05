@@ -16,6 +16,7 @@ export const createExpense = async (expense: Expense): Promise<Expense> => {
 	return response.json();
 };
 
+
 // Function to delete an expense in the backend. Method: DELETE
 export const deleteExpense = async (id: string): Promise<void> => {
 	console.log("have the id " + id);

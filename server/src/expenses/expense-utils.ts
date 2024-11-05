@@ -23,32 +23,25 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
  
  }
   
-export function deleteExpense(id: string, res: Response, db: Database) {
-    console.log("Delete function called with ID:", id);
-    
-    if (!id) {
-        console.log("No ID provided");
-        return res.status(400).json({ error: "Missing ID" });
-    }
-
-    const expenseIndex = expenses.findIndex(expense => expense.id === id);
-    console.log("Found expense at index:", expenseIndex);
-
-    if (expenseIndex === -1) {
-        console.log("No expense found with ID:", id);
-        return res.status(404).json({ error: "Expense not found" });
-    }
-
-    expenses.splice(expenseIndex, 1);
-    console.log("Successfully removed expense");
-    
-    return res.status(200).json({
-        message: "Expense deleted successfully",
-        newExpenses: expenses
-    });
+export async function deleteExpense(id: string, res: Response, db: Database) {
+    try {
+        await db.run("DELETE * FROM expenses WHERE id == ?", [id]);
+        res.status(201).send({ id});
+ 
+    } catch (error) {
+ 
+        return res.status(400).send({ error: `Expense could not be deleted, + ${error}` });
+    };
 }
 
-export function getExpenses(req: Request, res: Response, db: Database) {
-    res.status(200).send({ "data": expenses });
+export async function getExpenses(req: Request, res: Response, db: Database) {
+    try {
+        await db.all("SELECT * FROM expenses");
+        res.status(201).send();
+ 
+    } catch (error) {
+ 
+        return res.status(400).send({ error: `Expenses could not be fetched, + ${error}` });
+    };
 }
 
