@@ -1,7 +1,7 @@
 import { Expense } from "../types";
 import { Request, Response } from "express";
-import { expenses } from "../constants";
 import { Database } from "sqlite";
+
 
 export async function createExpenseServer(req: Request, res: Response, db: Database) {
 
@@ -22,6 +22,7 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
     };
  
  }
+  
   
 export async function deleteExpense(id: string, res: Response, db: Database) {
     try {

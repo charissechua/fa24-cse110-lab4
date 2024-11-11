@@ -13,7 +13,7 @@ export function createExpenseEndpoints(app: any, db: Database) {
    // Delete an expense
    app.delete("/expenses/:id", (req: Request, res: Response) => {
 
-       deleteExpense(req.params.id.toString(), res, db);
+       deleteExpense(req.params.id, res, db);
 
    });
 
@@ -24,4 +24,3 @@ export function createExpenseEndpoints(app: any, db: Database) {
 
    });
 }
-

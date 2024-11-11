@@ -19,4 +19,3 @@ const initDB = async () => {
 };
 
 export default initDB;
-
