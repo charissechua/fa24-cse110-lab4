@@ -5,9 +5,7 @@ import { Request, Response } from 'express';
 export function createExpenseEndpoints(app: any, db: Database) {
    // Create a new expense
    app.post("/expenses", (req: Request, res: Response) => {
-
        createExpenseServer(req, res, db);
-
    });
 
    // Delete an expense
@@ -24,4 +22,6 @@ export function createExpenseEndpoints(app: any, db: Database) {
 
    });
 }
+
+
 
